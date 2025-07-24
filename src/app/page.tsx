@@ -7,7 +7,7 @@ export default function Home() {
       <button className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110">
         Submit Drawing
       </button>
-      
+      <div className="border-2 px-120 py-20 rounded-2xl mt-10"></div>
     </div>
   );
 }
