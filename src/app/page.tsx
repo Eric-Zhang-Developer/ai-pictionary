@@ -1,7 +1,10 @@
 "use client"
 import Sketchpad from "@/components/Sketchpad";
+import { useState } from "react";
 
 export default function Home() {
+  const [image, setImage] = useState<string>("");
+
   return (
     <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
       <h1 className="text-4xl">AI Pictionary</h1>
