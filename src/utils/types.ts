@@ -1,0 +1,3 @@
+interface SketchpadProps {
+  setImage: () => void;
+}
