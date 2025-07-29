@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 import { SketchpadProps } from "@/utils/types";
-export default function Sketchpad({setImage}:SketchpadProps) {
+export default function Sketchpad({ setImage }: SketchpadProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
-  async function handleSubmit () {
+  async function handleSubmit() {
     console.log("Submitting!");
-    if (!canvasRef.current){
+    if (!canvasRef.current) {
       console.error("Canvas ref is not available yet");
       return;
     }
