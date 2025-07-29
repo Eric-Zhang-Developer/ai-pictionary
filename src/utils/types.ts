@@ -1,3 +1,3 @@
-interface SketchpadProps {
-  setImage: () => void;
+export interface SketchpadProps {
+  setImage: (image: string) => void;
 }

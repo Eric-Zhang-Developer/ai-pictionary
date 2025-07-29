@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
-export default function Sketchpad() {
+import { SketchpadProps } from "@/utils/types";
+export default function Sketchpad({setImage}:SketchpadProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
-  
+
   async function handleSubmit () {
     console.log("Submitting!");
     if (!canvasRef.current){
@@ -10,6 +11,7 @@ export default function Sketchpad() {
       return;
     }
     const image = await canvasRef.current.exportImage("png");
+    setImage(image);
     console.log(image);
   }
 
