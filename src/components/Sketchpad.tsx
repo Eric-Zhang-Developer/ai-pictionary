@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 import { SketchpadProps } from "@/utils/types";
-export default function Sketchpad({ setImage }: SketchpadProps) {
+export default function Sketchpad({ setResponse }: SketchpadProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
   async function handleSubmit() {
@@ -11,8 +11,29 @@ export default function Sketchpad({ setImage }: SketchpadProps) {
       return;
     }
     const image = await canvasRef.current.exportImage("png");
-    setImage(image);
-    console.log(image);
+    try {
+      const response = await fetch("http://localhost:3000/api/generate-response", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: image }),
+      });
+      
+      console.log("tried response")
+
+      if (!response.ok) {
+
+        throw new Error(`API Error: ${response.status} `);
+      }
+
+      const result = await response.json();
+      console.log("got result!")
+      console.log(result.response); 
+      console.log(Object.prototype.toString.call(result.response));
+      setResponse(result.response);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
