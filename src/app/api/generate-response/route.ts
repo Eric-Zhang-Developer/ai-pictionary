@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const ai = new GoogleGenAI({});
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: "This is my first API Call! Greetings!"
+      contents: textPrompt
     })
 
 
