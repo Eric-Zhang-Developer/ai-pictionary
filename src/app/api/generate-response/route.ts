@@ -10,15 +10,16 @@ export async function POST(request: Request) {
     const contents = [
       {inlineData: {
         mimeType: "image/png",
-        data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="}
+        data: image}
       },
       {text: "Guess this image"},
     ]
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: "Hello World"
+      contents: contents 
     })
+    console.log("sucess?")
 
     console.log(response.text);
     // Return only text for now all the metadata I don't want to expose to client side

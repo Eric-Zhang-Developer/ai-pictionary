@@ -10,16 +10,15 @@ export default function Sketchpad({ setResponse }: SketchpadProps) {
       console.error("Canvas ref is not available yet");
       return;
     }
-    const image = await canvasRef.current.exportImage("png");
+    const fullDataURI = await canvasRef.current.exportImage("png");
+    const rawBase64Data = fullDataURI.split(",")[1]; 
     try {
       const response = await fetch("http://localhost:3000/api/generate-response", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: image }),
+        body: JSON.stringify({ image: rawBase64Data }),
       });
       
-      console.log("tried response")
-
       if (!response.ok) {
 
         throw new Error(`API Error: ${response.status} `);
