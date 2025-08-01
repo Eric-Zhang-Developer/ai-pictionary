@@ -5,7 +5,6 @@ export default function Sketchpad({ setResponse }: SketchpadProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
   async function handleSubmit() {
-    console.log("Submitting!");
     if (!canvasRef.current) {
       console.error("Canvas ref is not available yet");
       return;
@@ -20,18 +19,14 @@ export default function Sketchpad({ setResponse }: SketchpadProps) {
       });
       
       if (!response.ok) {
-
         throw new Error(`API Error: ${response.status} `);
       }
 
       const result = await response.json();
-      console.log("got result!")
-      console.log(result.response); 
-      console.log(Object.prototype.toString.call(result.response));
       setResponse(result.response);
 
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
