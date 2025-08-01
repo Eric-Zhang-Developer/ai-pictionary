@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
-
+  // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it. 
   return (
     <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
       <h1 className="text-4xl">AI Pictionary</h1>
