@@ -3,7 +3,6 @@ import Sketchpad from "@/components/Sketchpad";
 import { useState } from "react";
 
 export default function Home() {
-  const [image, setImage] = useState<string>("");
   const [response, setResponse] = useState<string>("");
 
   return (
