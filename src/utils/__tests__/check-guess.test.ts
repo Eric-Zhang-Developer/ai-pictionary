@@ -19,7 +19,9 @@ describe("Guess Function", () => {
       expect(result).toBe(false);
     });
   });
-  
+
+  // TODO - Write Edge Cases
+
   describe("Business Cases", () => {
     it("should should return True when guess has the answer in it", () => {
       const guess = `This image is a **simple, hand-drawn illustration on a white background.** It features: * A **cartoon cat's head** drawn in black outline. The cat has two pointy ears, two vertical lines for eyes, and a "W" shape for its mouth. * To the right of the cat, the word **"Meow!"** is written in a casual, handwritten style.`;
