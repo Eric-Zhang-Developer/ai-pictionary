@@ -1,5 +1,6 @@
 export interface SketchpadProps {
   setResponse: (response: string) => void;
+  setGuessState: (guess: GuessState) => void;
 }
 
 export enum GuessState {
