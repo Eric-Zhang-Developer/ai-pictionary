@@ -10,6 +10,9 @@ export default function Home() {
   const [currentDrawingPrompt, seCurrentDrawingPrompt] = useState<string>("");
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
 
+  // Currently DRAWING_PROMPTS is a 100 item static list of prompts 
+  // A future feature could be selecting from prompt categories as well as difficulties. 
+  // Example a easy geography / map / culture question is draw the USA, a hard one would be draw Brunei 
   useEffect(() => {
     const randomPrompt = DRAWING_PROMPTS[Math.floor(Math.random() * DRAWING_PROMPTS.length)];
     seCurrentDrawingPrompt(randomPrompt);
