@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 import { GuessState, SketchpadProps } from "@/utils/types";
 import { checkGuess } from "@/utils/check-guess";
-export default function Sketchpad({ setResponse, setGuessState }: SketchpadProps) {
+export default function Sketchpad({ setResponse, setGuessState, currentDrawingPrompt }: SketchpadProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
   // Currently this function as well as the API function is very very janky. This is Proof of Concept Code 
@@ -36,7 +36,7 @@ export default function Sketchpad({ setResponse, setGuessState }: SketchpadProps
       setResponse(result.response);
 
       // Guess Check 
-      if (checkGuess(result.response, "cat")) {
+      if (checkGuess(result.response, currentDrawingPrompt)) {
         setGuessState(GuessState.Correct);
       } else {
         setGuessState(GuessState.Incorrect);
