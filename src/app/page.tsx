@@ -11,12 +11,12 @@ export default function Home() {
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
 
 
+  // Gets random prompt on page load 
   useEffect(() => {
     setCurrentDrawingPrompt(getRandomPrompt())
   }, [])
 
  
-  
   // Visual Indicator for guess correctness, this is a placeholder for a more advanced scoring system
   const borderColorMap = {
     [GuessState.Pending]: "border-black",
