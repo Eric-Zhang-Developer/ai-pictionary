@@ -1,23 +1,21 @@
 "use client";
 import Sketchpad from "@/components/Sketchpad";
 import { GuessState } from "@/utils/types";
-import { useEffect, useState } from "react";
-import { DRAWING_PROMPTS } from "@/utils/drawing-prompts";
+import { useCallback, useEffect, useState } from "react";
+import { getRandomPrompt } from "@/utils/get-random-prompt";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
   const [guessState, setGuessState] = useState<GuessState>(GuessState.Pending);
-  const [currentDrawingPrompt, seCurrentDrawingPrompt] = useState<string>("");
+  const [currentDrawingPrompt, setCurrentDrawingPrompt] = useState<string>("");
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
 
-  // Currently DRAWING_PROMPTS is a 100 item static list of prompts 
-  // A future feature could be selecting from prompt categories as well as difficulties. 
-  // Example a easy geography / map / culture question is draw the USA, a hard one would be draw Brunei 
+
   useEffect(() => {
-    const randomPrompt = DRAWING_PROMPTS[Math.floor(Math.random() * DRAWING_PROMPTS.length)];
-    seCurrentDrawingPrompt(randomPrompt);
+    setCurrentDrawingPrompt(getRandomPrompt())
   }, [])
 
+ 
   
   // Visual Indicator for guess correctness, this is a placeholder for a more advanced scoring system
   const borderColorMap = {
