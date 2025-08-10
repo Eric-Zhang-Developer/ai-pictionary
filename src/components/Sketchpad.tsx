@@ -8,6 +8,7 @@ function Sketchpad(
 ) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
+  // For functions that other components / parent need 
   useImperativeHandle(ref, () => ({
     clearCanvas: () => {
       if (canvasRef.current) {
