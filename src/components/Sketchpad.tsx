@@ -15,7 +15,7 @@ function Sketchpad(
         canvasRef.current.clearCanvas();
       }
     },
-  }));
+  }), []);
 
   // Currently this function as well as the API function is very very janky. This is Proof of Concept Code
   // The core code itself is fine however there are no guard rails and the code is a nightmare to debug
