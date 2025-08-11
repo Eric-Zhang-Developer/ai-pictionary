@@ -2,20 +2,29 @@ import { useRef, forwardRef, useImperativeHandle, type Ref } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 import { GuessState, SketchpadProps, SketchpadRef } from "@/utils/types";
 import { checkGuess } from "@/utils/check-guess";
+import { Trash2 } from "lucide-react";
 function Sketchpad(
   { setResponse, setGuessState, currentDrawingPrompt }: SketchpadProps,
   ref: Ref<SketchpadRef>
 ) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
-  // For functions that other components / parent need 
-  useImperativeHandle(ref, () => ({
-    clearCanvas: () => {
-      if (canvasRef.current) {
-        canvasRef.current.clearCanvas();
-      }
-    },
-  }), []);
+  // For functions that other components / parent need
+  useImperativeHandle(
+    ref,
+    () => ({
+      clearCanvas: () => {
+        clearCanvas();
+      },
+    }),
+    []
+  );
+
+  const clearCanvas = () => {
+    if (canvasRef.current) {
+      canvasRef.current.clearCanvas();
+    }
+  };
 
   // Currently this function as well as the API function is very very janky. This is Proof of Concept Code
   // The core code itself is fine however there are no guard rails and the code is a nightmare to debug
@@ -67,12 +76,20 @@ function Sketchpad(
         strokeColor="black"
         ref={canvasRef}
       ></ReactSketchCanvas>
-      <button
-        onClick={handleSubmit}
-        className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110"
-      >
-        Submit Drawing
-      </button>
+      <div className="flex flex-row gap-4">
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110"
+        >
+          Submit Drawing
+        </button>
+        <button
+          onClick={clearCanvas}
+          className="bg-red-400 py-3 px-3 text-2xl text-white rounded-xl shadow-lg hover:cursor-pointer transition hover:scale-110"
+        >
+          <Trash2 size={32}></Trash2>
+        </button>
+      </div>
     </>
   );
 }
