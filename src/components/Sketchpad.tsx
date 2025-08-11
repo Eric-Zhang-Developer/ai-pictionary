@@ -75,12 +75,17 @@ function Sketchpad(
         strokeColor="black"
         ref={canvasRef}
       ></ReactSketchCanvas>
-      <button
-        onClick={handleSubmit}
-        className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110"
-      >
-        Submit Drawing
-      </button>
+      <div className="space-x-4">
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110"
+        >
+          Submit Drawing
+        </button>
+        <button className="bg-red-400 py-3 px-3 text-2xl text-white rounded-xl shadow-lg hover:cursor-pointer transition hover:scale-110">
+          Erase
+        </button>
+      </div>
     </>
   );
 }
