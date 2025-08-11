@@ -82,7 +82,10 @@ function Sketchpad(
         >
           Submit Drawing
         </button>
-        <button className="bg-red-400 py-3 px-3 text-2xl text-white rounded-xl shadow-lg hover:cursor-pointer transition hover:scale-110">
+        <button
+          onClick={clearCanvas}
+          className="bg-red-400 py-3 px-3 text-2xl text-white rounded-xl shadow-lg hover:cursor-pointer transition hover:scale-110"
+        >
           Erase
         </button>
       </div>
