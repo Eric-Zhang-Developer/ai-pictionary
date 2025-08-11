@@ -2,6 +2,7 @@ import { useRef, forwardRef, useImperativeHandle, type Ref } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 import { GuessState, SketchpadProps, SketchpadRef } from "@/utils/types";
 import { checkGuess } from "@/utils/check-guess";
+import { Trash2 } from "lucide-react";
 function Sketchpad(
   { setResponse, setGuessState, currentDrawingPrompt }: SketchpadProps,
   ref: Ref<SketchpadRef>
@@ -75,7 +76,7 @@ function Sketchpad(
         strokeColor="black"
         ref={canvasRef}
       ></ReactSketchCanvas>
-      <div className="space-x-4">
+      <div className="flex flex-row gap-4">
         <button
           onClick={handleSubmit}
           className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110"
@@ -86,7 +87,7 @@ function Sketchpad(
           onClick={clearCanvas}
           className="bg-red-400 py-3 px-3 text-2xl text-white rounded-xl shadow-lg hover:cursor-pointer transition hover:scale-110"
         >
-          Erase
+          <Trash2 size={32}></Trash2>
         </button>
       </div>
     </>
