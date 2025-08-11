@@ -4,6 +4,10 @@ export interface SketchpadProps {
   currentDrawingPrompt: string;
 }
 
+export interface SketchpadRef {
+  clearCanvas: () => void;
+}
+
 export enum GuessState {
   Pending = "PENDING",
   Correct = "CORRECT",
