@@ -8,14 +8,22 @@ function Sketchpad(
 ) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
 
-  // For functions that other components / parent need 
-  useImperativeHandle(ref, () => ({
-    clearCanvas: () => {
-      if (canvasRef.current) {
-        canvasRef.current.clearCanvas();
-      }
-    },
-  }), []);
+  // For functions that other components / parent need
+  useImperativeHandle(
+    ref,
+    () => ({
+      clearCanvas: () => {
+        clearCanvas();
+      },
+    }),
+    []
+  );
+
+  const clearCanvas = () => {
+    if (canvasRef.current) {
+      canvasRef.current.clearCanvas();
+    }
+  };
 
   // Currently this function as well as the API function is very very janky. This is Proof of Concept Code
   // The core code itself is fine however there are no guard rails and the code is a nightmare to debug
