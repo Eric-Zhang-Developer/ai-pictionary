@@ -21,6 +21,7 @@ export default function Home() {
   const handleNextPrompt = () => {
     setCurrentDrawingPrompt(getRandomPrompt());
     setGuessState(GuessState.Pending);
+    setTurnCycleState(TurnCycleState.Drawing);
     setResponse("");
     if (sketchpadRef.current) {
       sketchpadRef.current.clearCanvas();
