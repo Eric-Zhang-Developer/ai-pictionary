@@ -47,8 +47,8 @@ export default function Home() {
     [GameState.Lobby]: <Lobby setGameState={setGameState}></Lobby>,
     // TODO: Refactor Core Game into its own Component
     [GameState.Game]: (
-      <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
-        <h2 className="text-3xl">Draw a {currentDrawingPrompt}</h2>
+      <div className="flex items-center justify-center flex-col gap-4 container mx-auto py-10">
+        <h1 className="text-5xl">Draw a {currentDrawingPrompt}</h1>
         <Sketchpad
           ref={sketchpadRef}
           setResponse={setResponse}
