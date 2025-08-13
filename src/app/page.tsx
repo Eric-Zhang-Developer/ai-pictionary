@@ -27,6 +27,19 @@ export default function Home() {
     }
   };
 
+  const turnCycleMap = {
+    [TurnCycleState.Drawing]: <div></div>,
+    [TurnCycleState.ShowingResult]: (
+      <TurnResultSection
+        response={response}
+        guessState={guessState}
+        handleNextPrompt={handleNextPrompt}
+      ></TurnResultSection>
+    ),
+    [TurnCycleState.Loading]: <div>Loading...</div>,
+    [TurnCycleState.Error]: <div>Error</div>,
+  };
+
   return (
     <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
       <h1 className="text-4xl">AI Pictionary</h1>
@@ -35,13 +48,10 @@ export default function Home() {
         ref={sketchpadRef}
         setResponse={setResponse}
         setGuessState={setGuessState}
+        setTurnCycleState={setTurnCycleState}
         currentDrawingPrompt={currentDrawingPrompt}
       ></Sketchpad>
-      <TurnResultSection
-        response={response}
-        guessState={guessState}
-        handleNextPrompt={handleNextPrompt}
-      ></TurnResultSection>
+      {turnCycleMap[turnCycleState]}
     </div>
   );
 }

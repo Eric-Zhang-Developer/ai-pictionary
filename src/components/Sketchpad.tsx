@@ -1,10 +1,10 @@
 import { useRef, forwardRef, useImperativeHandle, type Ref } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
-import { GuessState, SketchpadProps, SketchpadRef } from "@/utils/types";
+import { GuessState, SketchpadProps, SketchpadRef, TurnCycleState } from "@/utils/types";
 import { checkGuess } from "@/utils/check-guess";
 import { Trash2 } from "lucide-react";
 function Sketchpad(
-  { setResponse, setGuessState, currentDrawingPrompt }: SketchpadProps,
+  { setResponse, setGuessState, setTurnCycleState, currentDrawingPrompt }: SketchpadProps,
   ref: Ref<SketchpadRef>
 ) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
@@ -41,6 +41,7 @@ function Sketchpad(
 
     try {
       // API Call
+
       const response = await fetch("http://localhost:3000/api/generate-response", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -54,7 +55,9 @@ function Sketchpad(
       }
 
       const result = await response.json();
+
       setResponse(result.response);
+      setTurnCycleState(TurnCycleState.ShowingResult);
 
       // Guess Check
       if (checkGuess(result.response, currentDrawingPrompt)) {

@@ -2,6 +2,7 @@ export interface SketchpadProps {
   setResponse: (response: string) => void;
   setGuessState: (guess: GuessState) => void;
   currentDrawingPrompt: string;
+  setTurnCycleState: (turnCycle: TurnCycleState) => void;
 }
 
 export interface SketchpadRef {
