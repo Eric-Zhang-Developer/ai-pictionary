@@ -1,12 +1,14 @@
 "use client";
 import Sketchpad from "@/components/Sketchpad";
-import { GuessState, SketchpadRef } from "@/utils/types";
+import TurnResultSection from "@/components/TurnResultSection";
+import { GuessState, SketchpadRef, TurnCycleState } from "@/utils/types";
 import { useEffect, useState, useRef } from "react";
 import { getRandomPrompt } from "@/utils/get-random-prompt";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
   const [guessState, setGuessState] = useState<GuessState>(GuessState.Pending);
+  const [turnCycleState, setTurnCycleState] = useState<TurnCycleState>(TurnCycleState.Drawing);
   const [currentDrawingPrompt, setCurrentDrawingPrompt] = useState<string>("");
   const sketchpadRef = useRef<SketchpadRef>(null);
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
@@ -19,17 +21,24 @@ export default function Home() {
   const handleNextPrompt = () => {
     setCurrentDrawingPrompt(getRandomPrompt());
     setGuessState(GuessState.Pending);
+    setTurnCycleState(TurnCycleState.Drawing);
     setResponse("");
     if (sketchpadRef.current) {
       sketchpadRef.current.clearCanvas();
     }
   };
 
-  // Visual Indicator for guess correctness, this is a placeholder for a more advanced scoring system
-  const borderColorMap = {
-    [GuessState.Pending]: "border-black",
-    [GuessState.Correct]: "border-emerald-500",
-    [GuessState.Incorrect]: "border-red-500",
+  const turnCycleMap = {
+    [TurnCycleState.Drawing]: <div></div>,
+    [TurnCycleState.ShowingResult]: (
+      <TurnResultSection
+        response={response}
+        guessState={guessState}
+        handleNextPrompt={handleNextPrompt}
+      ></TurnResultSection>
+    ),
+    [TurnCycleState.Loading]: <div>Loading...</div>,
+    [TurnCycleState.Error]: <div>Error</div>,
   };
 
   return (
@@ -40,17 +49,13 @@ export default function Home() {
         ref={sketchpadRef}
         setResponse={setResponse}
         setGuessState={setGuessState}
+        setTurnCycleState={setTurnCycleState}
         currentDrawingPrompt={currentDrawingPrompt}
       ></Sketchpad>
-      <div className={`border-2 px-120 py-20 rounded-2xl mt-10 ${borderColorMap[guessState]}`}>
-        {response}
-      </div>
-      <button
-        onClick={handleNextPrompt}
-        className="bg-blue-400 text-white px-10 py-3 rounded-xl text-2xl shadow-lg hover:cursor-pointer transition hover:scale-110"
-      >
-        Next Prompt
-      </button>
+
+      {/* Results Section  */}
+      {/* TODO: Qol improvement would be auto scrolling to the results section */}
+      {turnCycleMap[turnCycleState]}
     </div>
   );
 }
