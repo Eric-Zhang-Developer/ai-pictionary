@@ -22,3 +22,9 @@ export enum TurnCycleState {
   ShowingResult = "SHOWINGRESULT",
   Error = "ERROR",
 }
+
+export interface TurnResultProps {
+  handleNextPrompt: () => void;
+  response: string;
+  guessState: GuessState;
+}
