@@ -13,3 +13,12 @@ export enum GuessState {
   Correct = "CORRECT",
   Incorrect = "INCORRECT",
 }
+
+// idk if it is honestly necessary to have another enum for turn cycle.
+// Possible refactor to combine guess state and turn cycle?
+export enum TurnCycleState {
+  Drawing = "DRAWING",
+  Loading = "LOADING",
+  ShowingResult = "SHOWINGRESULT",
+  Error = "ERROR",
+}

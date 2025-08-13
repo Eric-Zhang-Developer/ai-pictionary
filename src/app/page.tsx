@@ -1,12 +1,13 @@
 "use client";
 import Sketchpad from "@/components/Sketchpad";
-import { GuessState, SketchpadRef } from "@/utils/types";
+import { GuessState, SketchpadRef, TurnCycleState } from "@/utils/types";
 import { useEffect, useState, useRef } from "react";
 import { getRandomPrompt } from "@/utils/get-random-prompt";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
   const [guessState, setGuessState] = useState<GuessState>(GuessState.Pending);
+  const [turnCycleState, setTurnCycleState] = useState<TurnCycleState>(TurnCycleState.Drawing);
   const [currentDrawingPrompt, setCurrentDrawingPrompt] = useState<string>("");
   const sketchpadRef = useRef<SketchpadRef>(null);
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
