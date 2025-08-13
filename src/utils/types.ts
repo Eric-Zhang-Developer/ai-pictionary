@@ -35,3 +35,7 @@ export interface TurnResultProps {
   response: string;
   guessState: GuessState;
 }
+
+export interface LobbyProps {
+  setGameState: (gameState: GameState) => void;
+}

@@ -44,7 +44,7 @@ export default function Home() {
   };
 
   const gameStateMap = {
-    [GameState.Lobby]: <Lobby></Lobby>,
+    [GameState.Lobby]: <Lobby setGameState={setGameState}></Lobby>,
     // TODO: Refactor Core Game into its own Component
     [GameState.Game]: (
       <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
