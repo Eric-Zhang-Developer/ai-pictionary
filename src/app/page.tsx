@@ -52,6 +52,9 @@ export default function Home() {
         setTurnCycleState={setTurnCycleState}
         currentDrawingPrompt={currentDrawingPrompt}
       ></Sketchpad>
+
+      {/* Results Section  */}
+      {/* TODO: Qol improvement would be auto scrolling to the results section */}
       {turnCycleMap[turnCycleState]}
     </div>
   );
