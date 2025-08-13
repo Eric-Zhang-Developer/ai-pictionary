@@ -1,13 +1,15 @@
 "use client";
 import Sketchpad from "@/components/Sketchpad";
 import TurnResultSection from "@/components/TurnResultSection";
-import { GuessState, SketchpadRef, TurnCycleState } from "@/utils/types";
+import { GuessState, SketchpadRef, TurnCycleState, GameState } from "@/utils/types";
 import { useEffect, useState, useRef } from "react";
 import { getRandomPrompt } from "@/utils/get-random-prompt";
+import Lobby from "@/components/Lobby";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
   const [guessState, setGuessState] = useState<GuessState>(GuessState.Pending);
+  const [gameState, setGameState] = useState<GameState>(GameState.Lobby);
   const [turnCycleState, setTurnCycleState] = useState<TurnCycleState>(TurnCycleState.Drawing);
   const [currentDrawingPrompt, setCurrentDrawingPrompt] = useState<string>("");
   const sketchpadRef = useRef<SketchpadRef>(null);
@@ -41,21 +43,27 @@ export default function Home() {
     [TurnCycleState.Error]: <div>Error</div>,
   };
 
-  return (
-    <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
-      <h1 className="text-4xl">AI Pictionary</h1>
-      <h2 className="text-3xl">Draw a {currentDrawingPrompt}</h2>
-      <Sketchpad
-        ref={sketchpadRef}
-        setResponse={setResponse}
-        setGuessState={setGuessState}
-        setTurnCycleState={setTurnCycleState}
-        currentDrawingPrompt={currentDrawingPrompt}
-      ></Sketchpad>
+  const gameStateMap = {
+    [GameState.Lobby]: <Lobby></Lobby>,
+    // TODO: Refactor Core Game into its own Component
+    [GameState.Game]: (
+      <div className="flex items-center justify-center flex-col gap-4 container mx-auto">
+        <h2 className="text-3xl">Draw a {currentDrawingPrompt}</h2>
+        <Sketchpad
+          ref={sketchpadRef}
+          setResponse={setResponse}
+          setGuessState={setGuessState}
+          setTurnCycleState={setTurnCycleState}
+          currentDrawingPrompt={currentDrawingPrompt}
+        ></Sketchpad>
 
-      {/* Results Section  */}
-      {/* TODO: Qol improvement would be auto scrolling to the results section */}
-      {turnCycleMap[turnCycleState]}
-    </div>
-  );
+        {/* Results Section  */}
+        {/* TODO: Qol improvement would be auto scrolling to the results section */}
+        {turnCycleMap[turnCycleState]}
+      </div>
+    ),
+    [GameState.Results]: <div></div>,
+  };
+
+  return gameStateMap[gameState];
 }

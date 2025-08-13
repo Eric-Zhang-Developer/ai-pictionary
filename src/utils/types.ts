@@ -24,6 +24,12 @@ export enum TurnCycleState {
   Error = "ERROR",
 }
 
+export enum GameState {
+  Lobby = "LOBBY",
+  Game = "GAME",
+  Results = "RESULTS",
+}
+
 export interface TurnResultProps {
   handleNextPrompt: () => void;
   response: string;
