@@ -14,7 +14,7 @@ export default function TurnResultSection({
 
   return (
     <>
-      <div className={`border-2 px-120 py-20 rounded-2xl mt-10 ${borderColorMap[guessState]}`}>
+      <div className={`border-2 px-60 py-10 rounded-2xl mt-10 ${borderColorMap[guessState]}`}>
         {response}
       </div>
       <button
