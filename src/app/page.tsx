@@ -5,6 +5,7 @@ import { GuessState, SketchpadRef, TurnCycleState, GameState } from "@/utils/typ
 import { useEffect, useState, useRef } from "react";
 import { getRandomPrompt } from "@/utils/get-random-prompt";
 import Lobby from "@/components/Lobby";
+import GameResults from "@/components/GameResults";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
@@ -75,7 +76,7 @@ export default function Home() {
         {turnCycleMap[turnCycleState]}
       </div>
     ),
-    [GameState.Results]: <div>Game Over!</div>,
+    [GameState.Results]: <GameResults></GameResults>,
   };
 
   return gameStateMap[gameState];
