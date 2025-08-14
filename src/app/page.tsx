@@ -76,7 +76,9 @@ export default function Home() {
         {turnCycleMap[turnCycleState]}
       </div>
     ),
-    [GameState.Results]: <GameResults></GameResults>,
+    [GameState.Results]: (
+      <GameResults setGameState={setGameState} setRoundNumber={setRoundNumber}></GameResults>
+    ),
   };
 
   return gameStateMap[gameState];

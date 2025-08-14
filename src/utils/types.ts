@@ -1,5 +1,3 @@
-import { LargeNumberLike } from "crypto";
-
 export interface SketchpadProps {
   setResponse: (response: string) => void;
   setGuessState: (guess: GuessState) => void;
@@ -43,4 +41,9 @@ export interface TurnResultProps {
 
 export interface LobbyProps {
   setGameState: (gameState: GameState) => void;
+}
+
+export interface GameResultsProps {
+  setGameState: (gameState: GameState) => void;
+  setRoundNumber: (roundNumber: number) => void;
 }
