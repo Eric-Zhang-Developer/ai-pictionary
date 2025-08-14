@@ -3,6 +3,8 @@ export interface SketchpadProps {
   setGuessState: (guess: GuessState) => void;
   currentDrawingPrompt: string;
   setTurnCycleState: (turnCycle: TurnCycleState) => void;
+  setCorrectGuesses: (correctGuesses: number) => void;
+  correctGuesses: number;
 }
 
 export interface SketchpadRef {
@@ -46,4 +48,5 @@ export interface LobbyProps {
 export interface GameResultsProps {
   setGameState: (gameState: GameState) => void;
   setRoundNumber: (roundNumber: number) => void;
+  correctGuesses: number;
 }

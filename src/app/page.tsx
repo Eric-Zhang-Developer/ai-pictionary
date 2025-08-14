@@ -15,6 +15,7 @@ export default function Home() {
   const [currentDrawingPrompt, setCurrentDrawingPrompt] = useState<string>("");
   const sketchpadRef = useRef<SketchpadRef>(null);
   const [roundNumber, setRoundNumber] = useState(1);
+  const [correctGuesses, setCorrectGuesses] = useState(0);
 
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
 
@@ -69,6 +70,8 @@ export default function Home() {
           setGuessState={setGuessState}
           setTurnCycleState={setTurnCycleState}
           currentDrawingPrompt={currentDrawingPrompt}
+          setCorrectGuesses={setCorrectGuesses}
+          correctGuesses={correctGuesses}
         ></Sketchpad>
 
         {/* Results Section  */}
@@ -77,7 +80,11 @@ export default function Home() {
       </div>
     ),
     [GameState.Results]: (
-      <GameResults setGameState={setGameState} setRoundNumber={setRoundNumber}></GameResults>
+      <GameResults
+        setGameState={setGameState}
+        setRoundNumber={setRoundNumber}
+        correctGuesses={correctGuesses}
+      ></GameResults>
     ),
   };
 
