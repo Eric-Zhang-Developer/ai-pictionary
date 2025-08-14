@@ -84,6 +84,7 @@ export default function Home() {
         setGameState={setGameState}
         setRoundNumber={setRoundNumber}
         correctGuesses={correctGuesses}
+        setCorrectGuesses={setCorrectGuesses}
       ></GameResults>
     ),
   };

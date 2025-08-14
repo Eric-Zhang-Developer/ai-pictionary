@@ -4,10 +4,12 @@ export default function GameResults({
   setGameState,
   setRoundNumber,
   correctGuesses,
+  setCorrectGuesses,
 }: GameResultsProps) {
   const handlePlayAgain = () => {
     setGameState(GameState.Lobby);
     setRoundNumber(1);
+    setCorrectGuesses(0);
   };
   return (
     <main className="container mx-auto flex flex-col items-center gap-10 justify-center pt-40">

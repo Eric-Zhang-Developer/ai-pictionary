@@ -49,4 +49,5 @@ export interface GameResultsProps {
   setGameState: (gameState: GameState) => void;
   setRoundNumber: (roundNumber: number) => void;
   correctGuesses: number;
+  setCorrectGuesses: (correctGuesses: number) => void;
 }
