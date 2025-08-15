@@ -4,7 +4,14 @@ import { GuessState, SketchpadProps, SketchpadRef, TurnCycleState } from "@/util
 import { checkGuess } from "@/utils/check-guess";
 import { Trash2 } from "lucide-react";
 function Sketchpad(
-  { setResponse, setGuessState, setTurnCycleState, currentDrawingPrompt }: SketchpadProps,
+  {
+    setResponse,
+    setGuessState,
+    setTurnCycleState,
+    currentDrawingPrompt,
+    setCorrectGuesses,
+    correctGuesses,
+  }: SketchpadProps,
   ref: Ref<SketchpadRef>
 ) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
@@ -62,6 +69,8 @@ function Sketchpad(
       // Guess Check
       if (checkGuess(result.response, currentDrawingPrompt)) {
         setGuessState(GuessState.Correct);
+        const newCorrectGuesses = correctGuesses + 1;
+        setCorrectGuesses(newCorrectGuesses);
       } else {
         setGuessState(GuessState.Incorrect);
       }

@@ -5,6 +5,7 @@ import { GuessState, SketchpadRef, TurnCycleState, GameState } from "@/utils/typ
 import { useEffect, useState, useRef } from "react";
 import { getRandomPrompt } from "@/utils/get-random-prompt";
 import Lobby from "@/components/Lobby";
+import GameResults from "@/components/GameResults";
 
 export default function Home() {
   const [response, setResponse] = useState<string>("");
@@ -13,6 +14,9 @@ export default function Home() {
   const [turnCycleState, setTurnCycleState] = useState<TurnCycleState>(TurnCycleState.Drawing);
   const [currentDrawingPrompt, setCurrentDrawingPrompt] = useState<string>("");
   const sketchpadRef = useRef<SketchpadRef>(null);
+  const [roundNumber, setRoundNumber] = useState(1);
+  const [correctGuesses, setCorrectGuesses] = useState(0);
+
   // the image url processing happens entirely in Sketchpad. For now it is discarded after being given to the API. For future reference could save it.
 
   // Gets random prompt on page load
@@ -28,6 +32,14 @@ export default function Home() {
     if (sketchpadRef.current) {
       sketchpadRef.current.clearCanvas();
     }
+
+    // Round Check
+    const nextRound = roundNumber + 1;
+    setRoundNumber(nextRound);
+    if (nextRound > 5) {
+      console.log("end Game!!");
+      setGameState(GameState.Results);
+    }
   };
 
   const turnCycleMap = {
@@ -37,6 +49,9 @@ export default function Home() {
         response={response}
         guessState={guessState}
         handleNextPrompt={handleNextPrompt}
+        setGameState={setGameState}
+        roundNumber={roundNumber}
+        setRoundNumber={setRoundNumber}
       ></TurnResultSection>
     ),
     [TurnCycleState.Loading]: <div>Loading...</div>,
@@ -55,6 +70,8 @@ export default function Home() {
           setGuessState={setGuessState}
           setTurnCycleState={setTurnCycleState}
           currentDrawingPrompt={currentDrawingPrompt}
+          setCorrectGuesses={setCorrectGuesses}
+          correctGuesses={correctGuesses}
         ></Sketchpad>
 
         {/* Results Section  */}
@@ -62,7 +79,14 @@ export default function Home() {
         {turnCycleMap[turnCycleState]}
       </div>
     ),
-    [GameState.Results]: <div></div>,
+    [GameState.Results]: (
+      <GameResults
+        setGameState={setGameState}
+        setRoundNumber={setRoundNumber}
+        correctGuesses={correctGuesses}
+        setCorrectGuesses={setCorrectGuesses}
+      ></GameResults>
+    ),
   };
 
   return gameStateMap[gameState];
